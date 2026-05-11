@@ -59,7 +59,7 @@
   --ifm-navbar-shadow: 0 1px 0 var(--t1-border);
   --ifm-navbar-height: 60px;
 
-  --ifm-footer-background-color: #050505;
+  --ifm-footer-background-color: var(--t1-bg);
   --ifm-footer-color: var(--t1-fg-muted);
   --ifm-footer-link-color: var(--t1-fg-muted);
   --ifm-footer-title-color: var(--t1-fg);
@@ -239,6 +239,7 @@ body {
 
 /* Footer */
 .footer {
+  background: var(--t1-bg);
   border-top: 1px solid var(--t1-border);
 }
 .footer__title {

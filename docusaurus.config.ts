@@ -93,7 +93,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `© ${new Date().getFullYear()} T1API. Built with Docusaurus.`,
+      copyright: `© ${new Date().getFullYear()} T1API.`,
     },
     prism: {
       theme: prismThemes.vsDark,
