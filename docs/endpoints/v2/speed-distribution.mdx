@@ -20,3 +20,23 @@ Speed distribution across the full session sourced from the V2 direct client.
     { name: 'session', type: 'string', required: true, description: 'Session type' },
   ]}
 />
+
+<Callout variant="info">
+V2 endpoints source data from the F1 livetiming cache. The example below uses gp=4 (Bahrain GP) where data is available.
+</Callout>
+
+```bash
+curl "https://api.t1f1.com/api/v2/speed-distribution-data?year=2025&gp=4&session=Q" \
+  -H "X-API-Key: YOUR_KEY"
+```
+
+```json title="GET /api/v2/speed-distribution-data?year=2025&gp=4&session=Q"
+[
+  { "Time (s)": 0.215, "Speed (km/h)": 279.0, "Driver": "VER", "Color": "#3671C6" },
+  { "Time (s)": 0.495, "Speed (km/h)": 282.0, "Driver": "VER", "Color": "#3671C6" },
+  { "Time (s)": 1.215, "Speed (km/h)": 292.0, "Driver": "VER", "Color": "#3671C6" },
+  { "Time (s)": 1.415, "Speed (km/h)": 295.0, "Driver": "VER", "Color": "#3671C6" },
+  { "Time (s)": 1.655, "Speed (km/h)": 296.0, "Driver": "VER", "Color": "#3671C6" }
+  // ... 200+ more data points across all drivers
+]
+```

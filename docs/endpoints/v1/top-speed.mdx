@@ -28,25 +28,19 @@ curl "https://api.t1f1.com/api/v1/top-speed-data?year=2025&gp=1&session=Q" \
   -H "X-API-Key: YOUR_KEY"
 ```
 
-```json title="response"
-{
-  "drivers": [
-    {
-      "driver_code": "VER",
-      "driver_name": "Max Verstappen",
-      "top_speed": 355.0,
-      "lap_number": 12,
-      "session": "Q"
-    },
-    {
-      "driver_code": "HAM",
-      "driver_name": "Lewis Hamilton",
-      "top_speed": 352.5,
-      "lap_number": 8,
-      "session": "Q"
-    }
-  ]
-}
+```json title="GET /api/v1/top-speed-data?year=2025&gp=1&session=Q"
+[
+  { "Team": "Red Bull Racing", "Top Speed (km/h)": 334.0, "Color": "#3671C6" },
+  { "Team": "Racing Bulls",    "Top Speed (km/h)": 333.0, "Color": "#6692FF" },
+  { "Team": "Williams",        "Top Speed (km/h)": 332.0, "Color": "#64C4FF" },
+  { "Team": "Mercedes",        "Top Speed (km/h)": 332.0, "Color": "#27F4D2" },
+  { "Team": "Kick Sauber",     "Top Speed (km/h)": 331.0, "Color": "#52E252" },
+  { "Team": "Haas F1 Team",    "Top Speed (km/h)": 331.0, "Color": "#FFFFFF" },
+  { "Team": "Aston Martin",    "Top Speed (km/h)": 331.0, "Color": "#229971" },
+  { "Team": "McLaren",         "Top Speed (km/h)": 329.0, "Color": "#FF8000" },
+  { "Team": "Ferrari",         "Top Speed (km/h)": 329.0, "Color": "#E80020" },
+  { "Team": "Alpine",          "Top Speed (km/h)": 329.0, "Color": "#0093CC" }
+]
 ```
 
 <Callout variant="tip">

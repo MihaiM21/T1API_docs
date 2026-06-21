@@ -21,25 +21,18 @@ Qualifying session results including best lap times, tyre compounds, and session
   ]}
 />
 
-```json title="response"
-{
-  "session": {
-    "year": 2025,
-    "round": 1,
-    "event_name": "Bahrain Grand Prix",
-    "session_type": "Qualifying"
-  },
-  "results": [
-    {
-      "position": 1,
-      "driver_code": "VER",
-      "driver_name": "Max Verstappen",
-      "team": "Red Bull Racing",
-      "q1_time": "1:31.234",
-      "q2_time": "1:30.876",
-      "q3_time": "1:30.445",
-      "tyre_compound": "SOFT"
-    }
-  ]
-}
+```bash
+curl "https://api.t1f1.com/api/v1/qualifying-results-data?year=2025&gp=1&session=Q" \
+  -H "X-API-Key: YOUR_KEY"
+```
+
+```json title="GET /api/v1/qualifying-results-data?year=2025&gp=1&session=Q"
+[
+  { "Driver": "NOR", "Team": "McLaren",          "LapTime": "01:15.096", "LapTimeDelta": 0.000, "Color": "#FF8000" },
+  { "Driver": "PIA", "Team": "McLaren",          "LapTime": "01:15.180", "LapTimeDelta": 0.084, "Color": "#FF8000" },
+  { "Driver": "VER", "Team": "Red Bull Racing",  "LapTime": "01:15.481", "LapTimeDelta": 0.385, "Color": "#3671C6" },
+  { "Driver": "RUS", "Team": "Mercedes",         "LapTime": "01:15.546", "LapTimeDelta": 0.450, "Color": "#27F4D2" },
+  { "Driver": "TSU", "Team": "Racing Bulls",     "LapTime": "01:15.670", "LapTimeDelta": 0.574, "Color": "#6692FF" }
+  // ... 14 more drivers
+]
 ```

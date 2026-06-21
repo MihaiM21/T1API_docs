@@ -1,0 +1,55 @@
+---
+id: track-comparison
+title: V2 — Track Dominance Map
+sidebar_label: Track Dominance Map
+---
+
+# Track Dominance Map
+
+Colour-coded track map showing which of two drivers was faster through each minisector on their respective fastest laps.
+
+<EndpointCard method="GET" path="/api/v2/track-comparison-plot" description="PNG colour-coded track dominance map for two drivers." />
+<EndpointCard method="GET" path="/api/v2/track-comparison-data" description="JSON minisector fastest-driver assignments." />
+
+## Parameters
+
+<ParamTable
+  params={[
+    { name: 'year', type: 'integer', required: true, description: 'Season year (2018–2026)' },
+    { name: 'gp', type: 'integer | string', required: true, description: 'Round number, event key, or event name' },
+    { name: 'session', type: 'string', required: true, description: 'Session type (default: Q)' },
+    { name: 'd1', type: 'string', required: true, description: 'First driver TLA (e.g. VER)' },
+    { name: 'd2', type: 'string', required: true, description: 'Second driver TLA (e.g. NOR)' },
+  ]}
+/>
+
+```bash
+curl "https://api.t1f1.com/api/v2/track-comparison-data?year=2025&gp=1&session=Q&d1=VER&d2=NOR" \
+  -H "X-API-Key: YOUR_KEY"
+```
+
+<Callout variant="info">
+V2 endpoints require the session to be in the livetiming cache. The example uses gp=4 (Bahrain GP).
+</Callout>
+
+```bash
+curl "https://api.t1f1.com/api/v2/track-comparison-data?year=2025&gp=4&session=Q&d1=VER&d2=NOR" \
+  -H "X-API-Key: YOUR_KEY"
+```
+
+```json title="GET /api/v2/track-comparison-data?year=2025&gp=4&session=Q&d1=VER&d2=NOR"
+{
+  "driver1": "VER",
+  "driver2": "NOR",
+  "driver1_color": "#3671C6",
+  "driver2_color": "#FF8000",
+  "telemetry": [
+    { "x": 1660.0, "y": -602.0, "distance":   0.0, "speed": 279.0, "driver": "VER", "minisector": 1, "fastest_driver": "VER", "fastest_driver_int": 1 },
+    { "x": 1559.0, "y": -485.0, "distance":   0.0, "speed": 272.0, "driver": "NOR", "minisector": 1, "fastest_driver": "VER", "fastest_driver_int": 1 },
+    { "x": 1763.0, "y": -722.0, "distance": 158.1, "speed": 282.0, "driver": "VER", "minisector": 1, "fastest_driver": "VER", "fastest_driver_int": 1 },
+    { "x": 1660.0, "y": -602.0, "distance": 154.6, "speed": 278.0, "driver": "NOR", "minisector": 1, "fastest_driver": "VER", "fastest_driver_int": 1 },
+    { "x": 1960.0, "y": -953.0, "distance": 461.7, "speed": 282.0, "driver": "VER", "minisector": 1, "fastest_driver": "VER", "fastest_driver_int": 1 }
+    // ... 1000+ more telemetry points (x/y are track map coordinates)
+  ]
+}
+```

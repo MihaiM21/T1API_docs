@@ -19,15 +19,14 @@ Curated driver reference data. The `year` parameter accepts 2025–2026 for stat
   ]}
 />
 
-```json title="GET /api/static/drivers/Verstappen"
+```json title="GET /api/static/drivers?year=2025"
 {
-  "number": 1,
-  "code": "VER",
-  "first_name": "Max",
-  "last_name": "Verstappen",
-  "team": "Red Bull Racing",
-  "nationality": "Dutch",
-  "date_of_birth": "1997-09-30",
-  "world_championships": 4
+  "drivers": [
+    { "code": "VER", "name": "Verstappen", "full_name": "Max Verstappen",           "team": "Red Bull Racing", "color": "#3671C6", "number": 1  },
+    { "code": "TSU", "name": "Tsunoda",    "full_name": "Yuki Tsunoda",              "team": "Red Bull Racing", "color": "#4A79CC", "number": 22 },
+    { "code": "HAM", "name": "Hamilton",   "full_name": "Lewis Hamilton",            "team": "Ferrari",         "color": "#E80020", "number": 44 },
+    { "code": "LEC", "name": "Leclerc",   "full_name": "Charles Leclerc",           "team": "Ferrari",         "color": "#DC143C", "number": 16 }
+    // ... 17 more drivers
+  ]
 }
 ```

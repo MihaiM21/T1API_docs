@@ -1,0 +1,76 @@
+---
+id: standings
+title: V2 — Championship Standings
+sidebar_label: Championship Standings
+---
+
+# Championship Standings
+
+Drivers and constructors championship standings — current season, a complete season, or standings after a specific round.
+
+<EndpointCard method="GET" path="/api/v2/standings/drivers" description="Latest drivers championship standings." />
+<EndpointCard method="GET" path="/api/v2/standings/constructors" description="Latest constructors championship standings." />
+<EndpointCard method="GET" path="/api/v2/seasons/{year}/drivers-standings" description="Drivers standings for a complete season." />
+<EndpointCard method="GET" path="/api/v2/seasons/{year}/constructors-standings" description="Constructors standings for a complete season." />
+<EndpointCard method="GET" path="/api/v2/seasons/{year}/round/{round_nr}/drivers-standings" description="Drivers standings after a specific round." />
+<EndpointCard method="GET" path="/api/v2/seasons/{year}/round/{round_nr}/constructors-standings" description="Constructors standings after a specific round." />
+
+## Current standings
+
+No parameters required. Automatically resolves to the current season, or the previous season if the current one has not yet begun.
+
+```bash
+curl "https://api.t1f1.com/api/v2/standings/drivers" -H "X-API-Key: YOUR_KEY"
+curl "https://api.t1f1.com/api/v2/standings/constructors" -H "X-API-Key: YOUR_KEY"
+```
+
+```json title="GET /api/v2/standings/drivers"
+{
+  "year": 2026,
+  "round": null,
+  "source": "ergast",
+  "standings": [
+    { "position": 1,  "points": 156.0, "wins": 5, "driver_code": "ANT", "driver_name": "Andrea Kimi Antonelli", "team": "Mercedes",      "nationality": "Italian"     },
+    { "position": 2,  "points": 115.0, "wins": 1, "driver_code": "HAM", "driver_name": "Lewis Hamilton",        "team": "Ferrari",        "nationality": "British"     },
+    { "position": 3,  "points": 106.0, "wins": 1, "driver_code": "RUS", "driver_name": "George Russell",        "team": "Mercedes",      "nationality": "British"     },
+    { "position": 4,  "points":  75.0, "wins": 0, "driver_code": "LEC", "driver_name": "Charles Leclerc",       "team": "Ferrari",        "nationality": "Monegasque" },
+    { "position": 5,  "points":  73.0, "wins": 0, "driver_code": "NOR", "driver_name": "Lando Norris",          "team": "McLaren",        "nationality": "British"     }
+    // ... 17 more drivers
+  ]
+}
+```
+
+```json title="GET /api/v2/standings/constructors"
+{
+  "year": 2026,
+  "round": null,
+  "source": "ergast",
+  "standings": [
+    { "position": 1, "points": 262.0, "wins": 6, "team": "Mercedes",       "nationality": "German"   },
+    { "position": 2, "points": 190.0, "wins": 1, "team": "Ferrari",        "nationality": "Italian"  },
+    { "position": 3, "points": 141.0, "wins": 0, "team": "McLaren",        "nationality": "British"  },
+    { "position": 4, "points":  89.0, "wins": 0, "team": "Red Bull",       "nationality": "Austrian" },
+    { "position": 5, "points":  57.0, "wins": 0, "team": "Alpine F1 Team", "nationality": "French"   }
+    // ... 6 more constructors
+  ]
+}
+```
+
+`round` is `null` when the standings represent the full season to date.
+
+## By season or round
+
+<ParamTable
+  params={[
+    { name: 'year', type: 'integer', required: true, description: 'Season year (path parameter)' },
+    { name: 'round_nr', type: 'integer', required: false, description: 'Round number — only for round-specific endpoints (path parameter)' },
+  ]}
+/>
+
+```bash
+# Full 2024 season
+curl "https://api.t1f1.com/api/v2/seasons/2024/drivers-standings" -H "X-API-Key: YOUR_KEY"
+
+# After Round 10 of 2024
+curl "https://api.t1f1.com/api/v2/seasons/2024/round/10/drivers-standings" -H "X-API-Key: YOUR_KEY"
+```

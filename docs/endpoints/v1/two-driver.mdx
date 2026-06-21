@@ -26,6 +26,23 @@ Head-to-head telemetry comparisons between two drivers on the same lap.
 />
 
 ```bash
-curl "https://api.t1f1.com/api/v1/throttleBrake-comparison-2drivers-data?year=2025&gp=1&session=Q&driver1=VER&driver2=LEC" \
+curl "https://api.t1f1.com/api/v1/throttleBrake-comparison-2drivers-data?year=2025&gp=1&session=Q&driver1=VER&driver2=NOR" \
   -H "X-API-Key: YOUR_KEY"
+```
+
+```json title="GET /api/v1/throttleBrake-comparison-2drivers-data?year=2025&gp=1&session=Q&driver1=VER&driver2=NOR"
+{
+  "driver1": "VER",
+  "driver2": "NOR",
+  "driver1_color": "#3671C6",
+  "driver2_color": "#FF8000",
+  "telemetry": [
+    { "distance": 10.81,  "speed": 319.0, "throttle": 100.0, "brake": 0.0, "lap_time": 0.00, "driver": "VER" },
+    { "distance": 25.03,  "speed": 320.0, "throttle": 100.0, "brake": 0.0, "lap_time": 0.16, "driver": "VER" },
+    { "distance": 60.92,  "speed": 323.0, "throttle": 100.0, "brake": 0.0, "lap_time": 0.56, "driver": "VER" },
+    { "distance": 104.26, "speed": 325.0, "throttle": 100.0, "brake": 0.0, "lap_time": 1.04, "driver": "VER" },
+    { "distance": 118.70, "speed": 327.0, "throttle": 100.0, "brake": 0.0, "lap_time": 1.20, "driver": "VER" }
+    // ... 1000+ more telemetry points for both drivers
+  ]
+}
 ```

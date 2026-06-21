@@ -25,3 +25,27 @@ Throttle application patterns for all drivers across the session.
 curl "https://api.t1f1.com/api/v1/throttle-comparison-data?year=2025&gp=1&session=Q" \
   -H "X-API-Key: YOUR_KEY"
 ```
+
+```json title="GET /api/v1/throttle-comparison-data?year=2025&gp=1&session=Q"
+[
+  { "Driver": "HAM", "Average Throttle (%)": 82.10, "Color": "#E80020" },
+  { "Driver": "HAD", "Average Throttle (%)": 81.93, "Color": "#8AA8FF" },
+  { "Driver": "GAS", "Average Throttle (%)": 81.67, "Color": "#33A3D1" },
+  { "Driver": "ALO", "Average Throttle (%)": 81.40, "Color": "#2BB885" },
+  { "Driver": "ANT", "Average Throttle (%)": 81.12, "Color": "#00D2BE" },
+  { "Driver": "RUS", "Average Throttle (%)": 81.05, "Color": "#27F4D2" },
+  { "Driver": "LEC", "Average Throttle (%)": 80.89, "Color": "#DC143C" },
+  { "Driver": "PIA", "Average Throttle (%)": 80.76, "Color": "#FF9500" },
+  { "Driver": "HUL", "Average Throttle (%)": 80.52, "Color": "#52E252" },
+  { "Driver": "LAW", "Average Throttle (%)": 80.48, "Color": "#6692FF" },
+  { "Driver": "BOR", "Average Throttle (%)": 80.47, "Color": "#6BE66B" },
+  { "Driver": "VER", "Average Throttle (%)": 80.42, "Color": "#3671C6" },
+  { "Driver": "OCO", "Average Throttle (%)": 80.41, "Color": "#C5C9CC" },
+  { "Driver": "DOO", "Average Throttle (%)": 79.94, "Color": "#B6BABD" },
+  { "Driver": "TSU", "Average Throttle (%)": 79.91, "Color": "#4A79CC" },
+  { "Driver": "STR", "Average Throttle (%)": 79.89, "Color": "#229971" },
+  { "Driver": "ALB", "Average Throttle (%)": 79.77, "Color": "#64C4FF" },
+  { "Driver": "SAI", "Average Throttle (%)": 79.52, "Color": "#7AC8FF" },
+  { "Driver": "NOR", "Average Throttle (%)": 79.16, "Color": "#FF8000" }
+]
+```

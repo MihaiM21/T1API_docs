@@ -20,3 +20,37 @@ Throttle application patterns sourced from telemetry channel 4 (throttle, 0–10
     { name: 'session', type: 'string', required: true, description: 'Session type' },
   ]}
 />
+
+<Callout variant="info">
+V2 endpoints source data from the F1 livetiming cache. The example below uses gp=4 (Bahrain GP) where data is available.
+</Callout>
+
+```bash
+curl "https://api.t1f1.com/api/v2/throttle-comparison-data?year=2025&gp=4&session=Q" \
+  -H "X-API-Key: YOUR_KEY"
+```
+
+```json title="GET /api/v2/throttle-comparison-data?year=2025&gp=4&session=Q"
+[
+  { "Driver": "HAM", "Average Throttle (%)": 79.53, "Color": "#E80020" },
+  { "Driver": "BEA", "Average Throttle (%)": 79.47, "Color": "#B6BABD" },
+  { "Driver": "ALB", "Average Throttle (%)": 78.87, "Color": "#64C4FF" },
+  { "Driver": "ANT", "Average Throttle (%)": 78.83, "Color": "#00D2BE" },
+  { "Driver": "HAD", "Average Throttle (%)": 78.46, "Color": "#8AA8FF" },
+  { "Driver": "LEC", "Average Throttle (%)": 78.31, "Color": "#DC143C" },
+  { "Driver": "HUL", "Average Throttle (%)": 77.98, "Color": "#52E252" },
+  { "Driver": "LAW", "Average Throttle (%)": 77.91, "Color": "#6692FF" },
+  { "Driver": "OCO", "Average Throttle (%)": 77.90, "Color": "#C5C9CC" },
+  { "Driver": "GAS", "Average Throttle (%)": 77.89, "Color": "#33A3D1" },
+  { "Driver": "TSU", "Average Throttle (%)": 77.69, "Color": "#4A79CC" },
+  { "Driver": "VER", "Average Throttle (%)": 77.61, "Color": "#3671C6" },
+  { "Driver": "RUS", "Average Throttle (%)": 77.58, "Color": "#27F4D2" },
+  { "Driver": "SAI", "Average Throttle (%)": 77.57, "Color": "#7AC8FF" },
+  { "Driver": "NOR", "Average Throttle (%)": 76.93, "Color": "#FF8000" },
+  { "Driver": "BOR", "Average Throttle (%)": 76.58, "Color": "#6BE66B" },
+  { "Driver": "ALO", "Average Throttle (%)": 76.53, "Color": "#2BB885" },
+  { "Driver": "DOO", "Average Throttle (%)": 76.51, "Color": "#B6BABD" },
+  { "Driver": "PIA", "Average Throttle (%)": 76.27, "Color": "#FF9500" },
+  { "Driver": "STR", "Average Throttle (%)": 75.79, "Color": "#229971" }
+]
+```

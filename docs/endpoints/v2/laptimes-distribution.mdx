@@ -1,0 +1,49 @@
+---
+id: laptimes-distribution
+title: V2 — Lap Times Distribution
+sidebar_label: Lap Times Distribution
+---
+
+# Lap Times Distribution
+
+Per-lap breakdown of lap times and tyre compound for a single driver across a race session. Useful for stint analysis and tyre degradation visualisation.
+
+<EndpointCard method="GET" path="/api/v2/laptimes-distribution-data" description="JSON per-lap times with compound for a single driver." />
+
+## Parameters
+
+<ParamTable
+  params={[
+    { name: 'year', type: 'integer', required: true, description: 'Season year (2018–2026)' },
+    { name: 'gp', type: 'integer | string', required: true, description: 'Round number, event key, or event name' },
+    { name: 'session', type: 'string', required: true, description: 'Session type — typically R' },
+    { name: 'driver', type: 'string', required: true, description: 'Driver TLA (e.g. VER)' },
+  ]}
+/>
+
+```bash
+curl "https://api.t1f1.com/api/v2/laptimes-distribution-data?year=2025&gp=1&session=R&driver=VER" \
+  -H "X-API-Key: YOUR_KEY"
+```
+
+<Callout variant="info">
+V2 endpoints require the session to be in the livetiming cache. The example uses gp=4 (Bahrain GP).
+</Callout>
+
+```bash
+curl "https://api.t1f1.com/api/v2/laptimes-distribution-data?year=2025&gp=4&session=R&driver=VER" \
+  -H "X-API-Key: YOUR_KEY"
+```
+
+```json title="GET /api/v2/laptimes-distribution-data?year=2025&gp=4&session=R&driver=VER"
+[
+  { "driver": "VER", "lap_number": 1,  "lap_times_formatted": "1:33.943", "lap_times_seconds": 93.943, "compound": "MEDIUM" },
+  { "driver": "VER", "lap_number": 2,  "lap_times_formatted": "1:33.639", "lap_times_seconds": 93.639, "compound": "MEDIUM" },
+  { "driver": "VER", "lap_number": 3,  "lap_times_formatted": "1:33.744", "lap_times_seconds": 93.744, "compound": "MEDIUM" },
+  { "driver": "VER", "lap_number": 4,  "lap_times_formatted": "1:33.776", "lap_times_seconds": 93.776, "compound": "MEDIUM" },
+  { "driver": "VER", "lap_number": 5,  "lap_times_formatted": "1:33.646", "lap_times_seconds": 93.646, "compound": "MEDIUM" }
+  // ... 46 more laps
+]
+```
+
+**Status codes:** `400` (missing driver), `404` (driver not found in session), `500` (data unavailable)

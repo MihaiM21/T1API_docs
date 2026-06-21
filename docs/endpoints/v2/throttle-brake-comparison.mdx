@@ -1,0 +1,50 @@
+---
+id: throttle-brake-comparison
+title: V2 — Throttle & Brake Comparison
+sidebar_label: Throttle & Brake Comparison
+---
+
+# Throttle & Brake Comparison
+
+Speed, Throttle %, and Brake application vs. distance for two drivers' fastest laps overlaid side by side. Highlights exactly where each driver differs through a lap.
+
+<EndpointCard method="GET" path="/api/v2/throttle-brake-comparison-plot" description="PNG plot of Speed, Throttle %, and Brake vs. distance for two drivers." />
+<EndpointCard method="GET" path="/api/v2/throttle-brake-comparison-data" description="JSON Speed, Throttle, and Brake traces for both drivers." />
+
+## Parameters
+
+<ParamTable
+  params={[
+    { name: 'year', type: 'integer', required: true, description: 'Season year (2018–2026)' },
+    { name: 'gp', type: 'integer | string', required: true, description: 'Round number, event key, or event name' },
+    { name: 'session', type: 'string', required: true, description: 'Session type (default: Q)' },
+    { name: 'd1', type: 'string', required: true, description: 'First driver TLA (e.g. NOR)' },
+    { name: 'd2', type: 'string', required: true, description: 'Second driver TLA (e.g. PIA)' },
+  ]}
+/>
+
+```bash
+curl "https://api.t1f1.com/api/v2/throttle-brake-comparison-data?year=2025&gp=6&session=Q&d1=NOR&d2=PIA" \
+  -H "X-API-Key: YOUR_KEY"
+```
+
+<Callout variant="info">
+V2 endpoints require the session to be in the livetiming cache. The example uses gp=6 (Miami GP).
+</Callout>
+
+```json title="GET /api/v2/throttle-brake-comparison-data?year=2025&gp=6&session=Q&d1=NOR&d2=PIA"
+{
+  "driver1": "NOR",
+  "driver2": "PIA",
+  "driver1_color": "#FF8000",
+  "driver2_color": "#FF9500",
+  "telemetry": [
+    { "distance":    0.0, "speed": 321.0, "throttle": 99.0, "brake":   0.0, "lap_time": 0.008, "driver": "NOR" },
+    { "distance":  144.0, "speed": 324.0, "throttle": 98.0, "brake":   0.0, "lap_time": 0.408, "driver": "NOR" },
+    { "distance":  413.5, "speed": 325.0, "throttle": 98.0, "brake":   0.0, "lap_time": 0.728, "driver": "NOR" },
+    { "distance": 1047.2, "speed": 328.0, "throttle": 99.0, "brake":   0.0, "lap_time": 1.407, "driver": "NOR" },
+    { "distance": 3944.1, "speed": 306.0, "throttle":  0.0, "brake": 100.0, "lap_time": 4.408, "driver": "NOR" }
+    // ... 1000+ more telemetry points for both drivers
+  ]
+}
+```

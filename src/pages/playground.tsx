@@ -223,6 +223,7 @@ function PlaygroundInner() {
               >
                 <span className={styles.miniMethod}>{e.method}</span>
                 <span className={styles.endpointPath}>{e.path}</span>
+                {e.returns === 'image' && <span className={styles.imgTag}>IMG</span>}
               </button>
             ))}
           </div>

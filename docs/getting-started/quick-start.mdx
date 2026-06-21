@@ -39,7 +39,7 @@ const res = await fetch(
   { headers: { "X-API-Key": "YOUR_API_KEY" } }
 );
 const data = await res.json();
-console.log(data.drivers[0]); // { driver_code: "VER", top_speed: 326.4, ... }
+console.log(data[0]); // { Team: "Mercedes", "Top Speed (km/h)": 339, Color: "#27F4D2" }
 ```
 
   </TabItem>
@@ -54,7 +54,7 @@ resp = requests.get(
     headers={"X-API-Key": "YOUR_API_KEY"},
 )
 data = resp.json()
-print(data["drivers"][0])
+print(data[0])  # { "Team": "Mercedes", "Top Speed (km/h)": 339, "Color": "#27F4D2" }
 ```
 
   </TabItem>
@@ -63,24 +63,18 @@ print(data["drivers"][0])
 ## 3. Parse the response
 
 ```json
-{
-  "drivers": [
-    {
-      "driver_code": "VER",
-      "driver_name": "Max Verstappen",
-      "top_speed": 326.4,
-      "lap_number": 15,
-      "session": "Q"
-    },
-    {
-      "driver_code": "LEC",
-      "driver_name": "Charles Leclerc",
-      "top_speed": 324.1,
-      "lap_number": 14,
-      "session": "Q"
-    }
-  ]
-}
+[
+  { "Team": "Mercedes",        "Top Speed (km/h)": 339, "Color": "#27F4D2" },
+  { "Team": "Red Bull Racing", "Top Speed (km/h)": 334, "Color": "#3671C6" },
+  { "Team": "Ferrari",         "Top Speed (km/h)": 333, "Color": "#E80020" },
+  { "Team": "Racing Bulls",    "Top Speed (km/h)": 333, "Color": "#6692FF" },
+  { "Team": "Williams",        "Top Speed (km/h)": 332, "Color": "#64C4FF" },
+  { "Team": "Aston Martin",    "Top Speed (km/h)": 332, "Color": "#229971" },
+  { "Team": "Alpine",          "Top Speed (km/h)": 332, "Color": "#0093CC" },
+  { "Team": "Kick Sauber",     "Top Speed (km/h)": 332, "Color": "#52E252" },
+  { "Team": "Haas F1 Team",    "Top Speed (km/h)": 331, "Color": "#FFFFFF" },
+  { "Team": "McLaren",         "Top Speed (km/h)": 330, "Color": "#FF8000" }
+]
 ```
 
 ## Next steps

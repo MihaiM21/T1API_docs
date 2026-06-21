@@ -25,20 +25,33 @@ The API exposes a suite of observability endpoints. All monitoring endpoints req
 
 ```json title="GET /api/monitoring/system"
 {
-  "cpu": { "process_percent": 25.5, "system_percent": 45.2 },
+  "timestamp": "2026-06-21T15:11:27.604929",
+  "uptime_seconds": 81876,
+  "uptime_human": "22:44:36",
+  "cpu": {
+    "process_percent": 0.0,
+    "system_percent": 2.5,
+    "count": 4
+  },
   "memory": {
-    "process_mb": 245.3,
-    "process_percent": 12.1,
-    "available_mb": 7654.2,
-    "total_mb": 16384.0
+    "process_mb": 396.17,
+    "process_percent": 5.11,
+    "system_total_mb": 7747.32,
+    "system_available_mb": 2609.6,
+    "system_percent": 66.3
   },
   "disk": {
-    "usage_percent": 68.3,
-    "available_gb": 45.2,
-    "total_gb": 119.2
+    "total_gb": 74.79,
+    "used_gb": 31.64,
+    "free_gb": 40.06,
+    "percent": 44.1
   },
-  "uptime": 86400,
-  "uptime_human": "1 day"
+  "network": {
+    "bytes_sent": 799396968,
+    "bytes_received": 81329267,
+    "packets_sent": 152883,
+    "packets_received": 134624
+  }
 }
 ```
 
@@ -51,16 +64,105 @@ Every request is assigned a unique `request_id` (UUID) for correlation across lo
 <EndpointCard method="GET" path="/api/monitoring/stats" description="Aggregate per-endpoint request statistics." />
 <EndpointCard method="GET" path="/api/monitoring/load" description="Current active request count and error rate." />
 
-```json title="GET /api/monitoring/requests — response item"
+```json title="GET /api/monitoring/load"
 {
-  "request_id": "550e8400-e29b-41d4-a716-446655440000",
-  "timestamp": "2025-04-04T12:34:56.789Z",
-  "method": "GET",
-  "path": "/api/v1/top-speed-plot",
-  "endpoint": "quali_top_speed_plot",
-  "status_code": 200,
-  "duration_ms": 1234,
-  "client_ip": "192.168.1.100",
-  "api_key_tier": "standard"
+  "timestamp": "2026-06-21T15:11:28.079385",
+  "active_requests": 1.0,
+  "system": {
+    "cpu_percent": 0.0,
+    "memory_percent": 5.11,
+    "memory_mb": 396.17
+  },
+  "requests": {
+    "total": 8380,
+    "total_errors": 32,
+    "error_rate_percent": 0.38
+  },
+  "uptime": "22:44:36"
+}
+```
+
+```json title="GET /api/monitoring/requests — response items"
+{
+  "count": 100,
+  "limit": 100,
+  "requests": [
+    {
+      "request_id": "71c7bb1f-b0a2-44d0-be13-f617740f45e2",
+      "timestamp": "2026-06-21T14:58:37.119989",
+      "method": "GET",
+      "endpoint": "/metrics",
+      "full_url": "http://api.t1f1.com/metrics",
+      "client_ip": "10.0.4.2",
+      "user_agent": "Prometheus/3.9.1",
+      "tier": "public",
+      "status_code": 200,
+      "duration_ms": 23.36,
+      "error": null
+    }
+    // ... 99 more requests
+  ]
+}
+```
+
+```json title="GET /api/monitoring/errors — response items"
+{
+  "count": 32,
+  "limit": 50,
+  "errors": [
+    {
+      "request_id": "c3515c00-7c44-4a61-862a-7ecc82b09fcd",
+      "timestamp": "2026-06-20T16:28:12.452864",
+      "method": "GET",
+      "endpoint": "/api/v2/laptimes-distribution-data",
+      "full_url": "http://api.t1f1.com/api/v2/laptimes-distribution-data?year=2026&round=9&session=R",
+      "client_ip": "10.0.4.2",
+      "tier": "premium",
+      "status_code": 422,
+      "duration_ms": 2.93,
+      "error": null
+    }
+    // ... 31 more errors
+  ]
+}
+```
+
+```json title="GET /api/monitoring/stats"
+{
+  "summary": {
+    "total_requests": 8385,
+    "total_errors": 32,
+    "error_rate_percent": 0.38,
+    "tracked_requests_in_memory": 1000,
+    "tracked_errors_in_memory": 32,
+    "unique_endpoints": 56
+  },
+  "endpoints": {
+    "/metrics": {
+      "total_requests": 8190,
+      "total_errors": 0,
+      "error_rate": 0.0,
+      "avg_duration_ms": 16.33,
+      "min_duration_ms": 2.03,
+      "max_duration_ms": 212.03
+    },
+    "/api/static/teams": {
+      "total_requests": 15,
+      "total_errors": 0,
+      "error_rate": 0.0,
+      "avg_duration_ms": 4.73,
+      "min_duration_ms": 1.58,
+      "max_duration_ms": 16.70
+    },
+    "/api/static/drivers": {
+      "total_requests": 15,
+      "total_errors": 0,
+      "error_rate": 0.0,
+      "avg_duration_ms": 6.25,
+      "min_duration_ms": 2.02,
+      "max_duration_ms": 16.21
+    }
+    // ... 53 more endpoints
+  }
 }
 ```

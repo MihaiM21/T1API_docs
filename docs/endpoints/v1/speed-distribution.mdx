@@ -21,3 +21,19 @@ Distribution of speeds across the track for all drivers or a specific driver.
     { name: 'driver', type: 'string', required: false, description: '3-letter driver code (e.g. VER). Omit for all drivers.' },
   ]}
 />
+
+```bash
+curl "https://api.t1f1.com/api/v1/speed-distribution-data?year=2025&gp=1&session=Q" \
+  -H "X-API-Key: YOUR_KEY"
+```
+
+```json title="GET /api/v1/speed-distribution-data?year=2025&gp=1&session=Q"
+[
+  { "Time (s)": 0.218, "Speed (km/h)": 318.0, "Driver": "NOR", "Color": "#FF8000" },
+  { "Time (s)": 0.577, "Speed (km/h)": 318.0, "Driver": "NOR", "Color": "#FF8000" },
+  { "Time (s)": 0.857, "Speed (km/h)": 320.0, "Driver": "NOR", "Color": "#FF8000" },
+  { "Time (s)": 1.178, "Speed (km/h)": 323.0, "Driver": "NOR", "Color": "#FF8000" },
+  { "Time (s)": 1.378, "Speed (km/h)": 324.0, "Driver": "NOR", "Color": "#FF8000" }
+  // ... 200+ more data points across all drivers
+]
+```

@@ -8,15 +8,13 @@ sidebar_label: Circuits
 
 <EndpointCard method="GET" path="/api/static/circuits" description="All race circuits with location and characteristics." />
 
-```json title="response item"
+```json title="GET /api/static/circuits"
 {
-  "key": "bahrain",
-  "name": "Bahrain International Circuit",
-  "location": "Sakhir",
-  "country": "Bahrain",
-  "lap_length_km": 5.412,
-  "turns": 15,
-  "drs_zones": 3,
-  "first_gp": 2004
+  "circuits": [
+    { "circuit_id": "2",  "name": "Silverstone",       "country": "Great Britain", "years": [2022, 2021, 2020, 2019], "circuitKey": 2,  "countryKey": 2,   "iocCountryCode": "GBR" },
+    { "circuit_id": "4",  "name": "Hungaroring",        "country": "Hungary",       "years": [2021, 2020, 2019, 2018], "circuitKey": 4,  "countryKey": 14,  "iocCountryCode": "HUN" },
+    { "circuit_id": "7",  "name": "Spa-Francorchamps",  "country": "Belgium",       "years": [2021, 2020, 2019, 2018], "circuitKey": 7,  "countryKey": 16,  "iocCountryCode": "BEL" }
+    // ... more circuits
+  ]
 }
 ```

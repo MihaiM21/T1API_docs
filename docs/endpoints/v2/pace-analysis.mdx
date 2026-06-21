@@ -1,0 +1,57 @@
+---
+id: pace-analysis
+title: V2 — Pace Analysis
+sidebar_label: Pace Analysis
+---
+
+# Pace Analysis
+
+Box-and-whisker lap time distribution per driver or per constructor across all valid laps in a session. Laps outside 107 % of the session's quickest time are filtered out to remove outliers (in-laps, out-laps, safety car laps).
+
+<EndpointCard method="GET" path="/api/v2/driver-pace-plot" description="PNG pace distribution box plot per driver." />
+<EndpointCard method="GET" path="/api/v2/driver-pace-data" description="JSON statistical pace distribution per driver." />
+<EndpointCard method="GET" path="/api/v2/teams-pace-plot" description="PNG pace distribution box plot per constructor." />
+<EndpointCard method="GET" path="/api/v2/teams-pace-data" description="JSON statistical pace distribution per constructor." />
+
+## Parameters
+
+<ParamTable
+  params={[
+    { name: 'year', type: 'integer', required: true, description: 'Season year (2018–2026)' },
+    { name: 'gp', type: 'integer | string', required: true, description: 'Round number, event key, or event name' },
+    { name: 'session', type: 'string', required: true, description: 'Session type — typically R' },
+  ]}
+/>
+
+```bash
+# Driver pace
+curl "https://api.t1f1.com/api/v2/driver-pace-data?year=2025&gp=1&session=R" \
+  -H "X-API-Key: YOUR_KEY"
+
+# Team pace
+curl "https://api.t1f1.com/api/v2/teams-pace-data?year=2025&gp=1&session=R" \
+  -H "X-API-Key: YOUR_KEY"
+```
+
+<Callout variant="info">
+V2 endpoints require the session to be in the livetiming cache. The examples use gp=4 (Bahrain GP).
+</Callout>
+
+```json title="GET /api/v2/driver-pace-data?year=2025&gp=4&session=R"
+[
+  { "driver": "NOR", "team": "McLaren",         "color": "#FF8000", "lap_count": 50, "min": 91.116, "q1": 91.576, "median": 92.141, "q3": 93.466, "max": 95.034, "lap_times_seconds": [93.947, 93.789, 93.838, 93.936, 93.82] },
+  { "driver": "PIA", "team": "McLaren",         "color": "#FF9500", "lap_count": 51, "min": 91.039, "q1": 91.590, "median": 92.181, "q3": 93.581, "max": 95.359, "lap_times_seconds": [94.084, 94.042, 93.699, 93.967, 93.831] },
+  { "driver": "LEC", "team": "Ferrari",         "color": "#DC143C", "lap_count": 51, "min": 91.469, "q1": 91.906, "median": 92.312, "q3": 93.738, "max": 95.423, "lap_times_seconds": [94.121, 94.129, 93.954, 93.878, 93.879] },
+  { "driver": "VER", "team": "Red Bull Racing", "color": "#3671C6", "lap_count": 51, "min": 91.041, "q1": 91.602, "median": 92.300, "q3": 93.640, "max": 95.220, "lap_times_seconds": [93.943, 93.639, 93.744, 93.776, 93.646] }
+  // ... 16 more drivers (lap_times_seconds arrays truncated above — each contains all race laps)
+]
+```
+
+```json title="GET /api/v2/teams-pace-data?year=2025&gp=4&session=R"
+[
+  { "team": "McLaren",         "color": "#FF8000", "lap_count": 101, "min": 91.039, "q1": 91.573, "median": 92.176, "q3": 93.512, "max": 95.359 },
+  { "team": "Red Bull Racing", "color": "#3671C6", "lap_count": 102, "min": 91.041, "q1": 91.985, "median": 92.664, "q3": 93.745, "max": 96.396 },
+  { "team": "Ferrari",         "color": "#E80020", "lap_count": 102, "min": 91.469, "q1": 91.931, "median": 92.540, "q3": 93.838, "max": 95.423 }
+  // ... 7 more teams
+]
+```

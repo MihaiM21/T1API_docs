@@ -10,15 +10,18 @@ Public endpoint — no API key required. Returns the operational status of the A
 
 <EndpointCard method="GET" path="/api/health" description="Health check — public, no auth required." />
 
-```json title="response"
+```json title="GET /api/health"
 {
   "status": "healthy",
-  "version": "1.0.0",
+  "version": "1.5.0",
   "environment": "production",
   "checks": {
-    "database": "ok",
-    "cache": "ok",
-    "data_source": "ok"
+    "api": "healthy",
+    "mongodb": "healthy",
+    "session_tracker": "healthy",
+    "background_processor": "running",
+    "processed_sessions": 0,
+    "environment": "production"
   }
 }
 ```

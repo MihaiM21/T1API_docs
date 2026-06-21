@@ -20,3 +20,27 @@ Speed trap comparison using official F1 speed trap sensors (ST data). Differs fr
     { name: 'session', type: 'string', required: true, description: 'Session type' },
   ]}
 />
+
+<Callout variant="info">
+V2 endpoints source data from the F1 livetiming cache. If a session is not yet cached, the API returns an error. Use a round that has already been processed — the example below uses gp=4 (Bahrain GP).
+</Callout>
+
+```bash
+curl "https://api.t1f1.com/api/v2/top-speed-st-data?year=2025&gp=4&session=Q" \
+  -H "X-API-Key: YOUR_KEY"
+```
+
+```json title="GET /api/v2/top-speed-st-data?year=2025&gp=4&session=Q"
+[
+  { "Team": "Alpine",          "Top Speed (km/h)": 299.0, "Color": "#0093CC" },
+  { "Team": "McLaren",         "Top Speed (km/h)": 299.0, "Color": "#FF8000" },
+  { "Team": "Red Bull Racing", "Top Speed (km/h)": 299.0, "Color": "#3671C6" },
+  { "Team": "Williams",        "Top Speed (km/h)": 298.0, "Color": "#64C4FF" },
+  { "Team": "Ferrari",         "Top Speed (km/h)": 298.0, "Color": "#E80020" },
+  { "Team": "Mercedes",        "Top Speed (km/h)": 298.0, "Color": "#27F4D2" },
+  { "Team": "Racing Bulls",    "Top Speed (km/h)": 298.0, "Color": "#6692FF" },
+  { "Team": "Haas F1 Team",    "Top Speed (km/h)": 297.0, "Color": "#FFFFFF" },
+  { "Team": "Kick Sauber",     "Top Speed (km/h)": 297.0, "Color": "#52E252" },
+  { "Team": "Aston Martin",    "Top Speed (km/h)": 296.0, "Color": "#229971" }
+]
+```

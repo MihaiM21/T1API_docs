@@ -17,14 +17,19 @@ sidebar_label: Teams
   ]}
 />
 
-```json title="GET /api/static/teams/Red Bull"
+```json title="GET /api/static/teams?year=2025"
 {
-  "name": "Red Bull Racing",
-  "full_name": "Oracle Red Bull Racing",
-  "colour": "#0600EF",
-  "drivers": ["VER", "PER"],
-  "chassis": "RB21",
-  "power_unit": "Honda RBPT",
-  "base": "Milton Keynes, UK"
+  "teams": [
+    { "name": "Red Bull Racing", "alt_name": "Red Bull Racing RBPT", "short_name": "RBR",  "color": "#3671C6", "drivers": ["VER", "TSU"] },
+    { "name": "Ferrari",         "short_name": "FER",                                       "color": "#E80020", "drivers": ["HAM", "LEC"] },
+    { "name": "Mercedes",        "short_name": "MER",                                       "color": "#27F4D2", "drivers": ["RUS", "ANT"] },
+    { "name": "McLaren",         "short_name": "MCL",                                       "color": "#FF8000", "drivers": ["NOR", "PIA"] },
+    { "name": "Aston Martin",    "short_name": "AMR",                                       "color": "#229971", "drivers": ["ALO", "STR"] },
+    { "name": "Alpine",          "short_name": "ALP",                                       "color": "#0093CC", "drivers": ["GAS", "COL"] },
+    { "name": "Williams",        "short_name": "WIL",                                       "color": "#64C4FF", "drivers": ["ALB", "SAI"] },
+    { "name": "Racing Bulls",    "short_name": "VCARB",                                     "color": "#6692FF", "drivers": ["LAW", "HAD"] },
+    { "name": "Kick Sauber",     "short_name": "SAU",                                       "color": "#52E252", "drivers": ["HUL", "BOR"] },
+    { "name": "Haas",            "short_name": "HAA",                                       "color": "#B6BABD", "drivers": ["BEA", "OCO"] }
+  ]
 }
 ```

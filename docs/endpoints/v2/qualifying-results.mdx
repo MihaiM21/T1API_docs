@@ -1,0 +1,47 @@
+---
+id: qualifying-results
+title: V2 — Qualifying Results
+sidebar_label: Qualifying Results
+---
+
+# Qualifying Results
+
+All drivers' qualifying lap times sorted by delta to the fastest lap.
+
+<EndpointCard method="GET" path="/api/v2/qualifying-results-plot" description="PNG chart of qualifying lap times ranked by delta." />
+<EndpointCard method="GET" path="/api/v2/qualifying-results-data" description="JSON qualifying results with lap times and deltas." />
+
+## Parameters
+
+<ParamTable
+  params={[
+    { name: 'year', type: 'integer', required: true, description: 'Season year (2018–2026)' },
+    { name: 'gp', type: 'integer | string', required: true, description: 'Round number, event key, or event name' },
+    { name: 'session', type: 'string', required: true, description: 'Session type (default: Q)' },
+  ]}
+/>
+
+```bash
+curl "https://api.t1f1.com/api/v2/qualifying-results-data?year=2025&gp=1&session=Q" \
+  -H "X-API-Key: YOUR_KEY"
+```
+
+<Callout variant="info">
+V2 endpoints require the session to be in the livetiming cache. The example uses gp=4 (Bahrain GP).
+</Callout>
+
+```bash
+curl "https://api.t1f1.com/api/v2/qualifying-results-data?year=2025&gp=4&session=Q" \
+  -H "X-API-Key: YOUR_KEY"
+```
+
+```json title="GET /api/v2/qualifying-results-data?year=2025&gp=4&session=Q"
+[
+  { "Driver": "VER", "Team": "Red Bull Racing", "LapTime": "1:26.983", "LapTimeDelta": 0.000, "Color": "#3671C6" },
+  { "Driver": "NOR", "Team": "McLaren",          "LapTime": "1:26.995", "LapTimeDelta": 0.012, "Color": "#FF8000" },
+  { "Driver": "PIA", "Team": "McLaren",          "LapTime": "1:27.027", "LapTimeDelta": 0.044, "Color": "#FF8000" },
+  { "Driver": "LEC", "Team": "Ferrari",          "LapTime": "1:27.299", "LapTimeDelta": 0.316, "Color": "#E80020" },
+  { "Driver": "RUS", "Team": "Mercedes",         "LapTime": "1:27.318", "LapTimeDelta": 0.335, "Color": "#27F4D2" }
+  // ... 15 more drivers
+]
+```

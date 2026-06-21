@@ -1,0 +1,47 @@
+---
+id: tyre-stint
+title: V2 — Tyre Stint Strategy
+sidebar_label: Tyre Stint Strategy
+---
+
+# Tyre Stint Strategy
+
+Timeline of each driver's tyre stints across a race — compound, start lap, and end lap.
+
+<EndpointCard method="GET" path="/api/v2/tyre-stint-usage-plot" description="PNG timeline of tyre stints per driver." />
+<EndpointCard method="GET" path="/api/v2/tyre-stint-usage-data" description="JSON per-stint records for all drivers." />
+
+## Parameters
+
+<ParamTable
+  params={[
+    { name: 'year', type: 'integer', required: true, description: 'Season year (2018–2026)' },
+    { name: 'gp', type: 'integer | string', required: true, description: 'Round number, event key, or event name' },
+    { name: 'session', type: 'string', required: true, description: 'Session type — typically R' },
+  ]}
+/>
+
+```bash
+curl "https://api.t1f1.com/api/v2/tyre-stint-usage-data?year=2025&gp=1&session=R" \
+  -H "X-API-Key: YOUR_KEY"
+```
+
+<Callout variant="info">
+V2 endpoints require the session to be in the livetiming cache. The example uses gp=4 (Bahrain GP).
+</Callout>
+
+```bash
+curl "https://api.t1f1.com/api/v2/tyre-stint-usage-data?year=2025&gp=4&session=R" \
+  -H "X-API-Key: YOUR_KEY"
+```
+
+```json title="GET /api/v2/tyre-stint-usage-data?year=2025&gp=4&session=R"
+[
+  { "driver": "VER", "team": "Red Bull Racing", "position": 1, "stint_number": 1, "compound": "MEDIUM", "start_lap": 1,  "end_lap": 21, "lap_count": 21, "tyre_life_end": 21, "color": "#FFD93D" },
+  { "driver": "VER", "team": "Red Bull Racing", "position": 1, "stint_number": 2, "compound": "HARD",   "start_lap": 22, "end_lap": 53, "lap_count": 32, "tyre_life_end": 32, "color": "#F0F0F0" },
+  { "driver": "NOR", "team": "McLaren",         "position": 2, "stint_number": 1, "compound": "MEDIUM", "start_lap": 1,  "end_lap": 21, "lap_count": 21, "tyre_life_end": 21, "color": "#FFD93D" },
+  { "driver": "NOR", "team": "McLaren",         "position": 2, "stint_number": 2, "compound": "HARD",   "start_lap": 22, "end_lap": 53, "lap_count": 32, "tyre_life_end": 32, "color": "#F0F0F0" },
+  { "driver": "PIA", "team": "McLaren",         "position": 3, "stint_number": 1, "compound": "MEDIUM", "start_lap": 1,  "end_lap": 20, "lap_count": 20, "tyre_life_end": 20, "color": "#FFD93D" }
+  // ... 35+ more stints across all drivers
+]
+```
